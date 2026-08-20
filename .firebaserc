@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "gen-lang-client-0881564766"
+  },
+  "targets": {
+    "gen-lang-client-0881564766": {
+      "hosting": {
+        "agrimach-parts": [
+          "agrimach-parts"
+        ]
+      }
+    }
+  }
+}

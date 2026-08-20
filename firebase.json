@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "agrimach-parts",
     "site": "agrimach-parts",
     "public": "dist",
     "ignore": [
