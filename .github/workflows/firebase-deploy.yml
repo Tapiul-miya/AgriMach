@@ -1,10 +1,11 @@
-name: Deploy to Firebase Hosting on Merge
+name: AgriMach Firebase Hosting Deploy
 
 on:
   push:
     branches:
       - main
       - master
+  workflow_dispatch:
 
 permissions:
   checks: write
@@ -13,6 +14,7 @@ permissions:
 
 jobs:
   build_and_deploy:
+    name: Build & Deploy to Firebase
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
