@@ -1,0 +1,22 @@
+{
+  "short_name": "AgriMach",
+  "name": "AgriMach - Heavy Machinery Spare Parts",
+  "description": "Commercial spare parts marketplace and fleet inventory for Tractors, JCB backhoes, and Combine Harvesters.",
+  "icons": [
+    {
+      "src": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=192&auto=format&fit=crop&q=80",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=512&auto=format&fit=crop&q=80",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#090d16",
+  "theme_color": "#f59e0b",
+  "display": "standalone",
+  "orientation": "portrait"
+}
