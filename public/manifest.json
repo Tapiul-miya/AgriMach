@@ -38,7 +38,7 @@
   "start_url": "/",
   "scope": "/",
   "background_color": "#090d16",
-  "theme_color": "#f59e0b",
+  "theme_color": "#090d16",
   "display": "standalone",
   "orientation": "portrait",
   "prefer_related_applications": false,

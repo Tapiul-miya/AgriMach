@@ -1,4 +1,4 @@
-const CACHE_NAME = 'agrimach-pwa-v5';
+const CACHE_NAME = 'agrimach-pwa-v6';
 
 // Core static assets required for instant offline loading & WebAPK generation
 const PRECACHE_ASSETS = [
@@ -62,20 +62,32 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // 1. HTML Navigation Requests -> Network First (with cache fallback)
+  // 1. HTML Navigation Requests -> Instant Cache First with Background Network Revalidation (Eliminates white flash)
   if (req.mode === 'navigate' || req.destination === 'document' || req.headers.get('accept')?.includes('text/html')) {
     event.respondWith(
-      fetch(req)
-        .then(networkRes => {
-          if (networkRes && networkRes.status === 200) {
-            const copy = networkRes.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(req, copy));
-          }
-          return networkRes;
-        })
-        .catch(() => {
-          return caches.match('/') || caches.match('/index.html') || new Response('Offline', { status: 503, headers: { 'Content-Type': 'text/plain' } });
-        })
+      caches.match('/index.html').then(cachedHtml => {
+        // Fetch fresh HTML in background to update cache
+        const networkFetch = fetch(req)
+          .then(networkRes => {
+            if (networkRes && networkRes.status === 200) {
+              const copy = networkRes.clone();
+              caches.open(CACHE_NAME).then(cache => cache.put('/index.html', copy));
+            }
+            return networkRes;
+          })
+          .catch(err => {
+            console.warn('Navigation network fetch failed, using cache:', err);
+            return cachedHtml;
+          });
+
+        // Return cached HTML instantly (0ms delay) if available to avoid browser white screen wait
+        if (cachedHtml) {
+          return cachedHtml;
+        }
+
+        // If no cache yet, wait for network fetch
+        return networkFetch;
+      })
     );
     return;
   }
