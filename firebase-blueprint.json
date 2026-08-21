@@ -1,0 +1,122 @@
+{
+  "entities": {
+    "SparePart": {
+      "title": "SparePart",
+      "description": "Heavy machinery spare part inventory item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "banglaName": { "type": "string" },
+        "partNumber": { "type": "string" },
+        "category": { "type": "string" },
+        "brand": { "type": "string" },
+        "price": { "type": "number" },
+        "stockQuantity": { "type": "number" },
+        "minStockAlert": { "type": "number" },
+        "compatibleModels": { "type": "array" },
+        "supplier": { "type": "string" },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "description": { "type": "string" },
+        "specifications": { "type": "object" },
+        "imageUrl": { "type": "string" },
+        "isOEM": { "type": "boolean" },
+        "warrantyMonths": { "type": "number" },
+        "criticalLevel": { "type": "string" },
+        "lastRestocked": { "type": "string" }
+      },
+      "required": ["id", "name", "price", "stockQuantity"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Commercial spare parts customer order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "district": { "type": "string" },
+        "thana": { "type": "string" },
+        "address": { "type": "string" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "fulfillmentType": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "status": { "type": "string" },
+        "trackingNumber": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "customerName", "customerPhone", "totalAmount", "status"]
+    },
+    "Supplier": {
+      "title": "Supplier",
+      "description": "Heavy machinery OEM and aftermarket supplier",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "location": { "type": "string" },
+        "rating": { "type": "number" },
+        "categoryFocus": { "type": "array" },
+        "leadTimeDays": { "type": "number" },
+        "activeOrders": { "type": "number" }
+      },
+      "required": ["id", "name"]
+    },
+    "CategoryConfig": {
+      "title": "CategoryConfig",
+      "description": "Machinery category configuration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "iconName": { "type": "string" }
+      },
+      "required": ["id", "label"]
+    },
+    "UserVehicle": {
+      "title": "UserVehicle",
+      "description": "User garage vehicle or machinery entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "machineryType": { "type": "string" },
+        "make": { "type": "string" },
+        "model": { "type": "string" },
+        "year": { "type": "number" },
+        "engineNumber": { "type": "string" },
+        "chassisNumber": { "type": "string" },
+        "hoursOperated": { "type": "number" },
+        "isDefault": { "type": "boolean" }
+      },
+      "required": ["id", "machineryType", "make", "model"]
+    }
+  },
+  "firestore": {
+    "/parts/{partId}": {
+      "schema": "SparePart",
+      "description": "Spare parts inventory"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer orders"
+    },
+    "/suppliers/{supplierId}": {
+      "schema": "Supplier",
+      "description": "Suppliers directory"
+    },
+    "/categories/{categoryId}": {
+      "schema": "CategoryConfig",
+      "description": "Machinery categories"
+    },
+    "/vehicles/{vehicleId}": {
+      "schema": "UserVehicle",
+      "description": "Registered garage machinery"
+    }
+  }
+}

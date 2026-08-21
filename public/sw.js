@@ -1,7 +1,12 @@
-const CACHE_NAME = 'agrimach-cache-v1';
+const CACHE_NAME = 'agrimach-cache-v3';
 const urlsToCache = [
   '/',
-  '/index.html'
+  '/index.html',
+  '/app-icon.png',
+  '/og-image.jpg',
+  '/app-icon.svg',
+  '/favicon.svg',
+  '/manifest.json'
 ];
 
 self.addEventListener('install', event => {

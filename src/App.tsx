@@ -10,7 +10,9 @@ import { CartAndCheckoutModal } from './components/CartAndCheckoutModal';
 import { UserOrdersModal } from './components/UserOrdersModal';
 import { SpecialRequestModal } from './components/SpecialRequestModal';
 import { PartFormModal } from './components/PartFormModal';
+import { ShareAppModal } from './components/ShareAppModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
+import { AppIcon } from './components/AppIcon';
 import { 
   ShieldCheck, 
   Truck, 
@@ -27,7 +29,14 @@ import {
 import { AnimatePresence, motion } from 'motion/react';
 
 const MainContent: React.FC = () => {
-  const { mode, toastMessage, setToastMessage, setIsDiagnosticOpen, setIsGarageModalOpen } = useShop();
+  const { 
+    mode, 
+    toastMessage, 
+    setToastMessage, 
+    setIsDiagnosticOpen, 
+    setIsGarageModalOpen,
+    setIsShareModalOpen 
+  } = useShop();
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white pb-14 md:pb-0">
@@ -116,8 +125,8 @@ const MainContent: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             <div className="space-y-3">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-600 via-orange-500 to-yellow-500 flex items-center justify-center text-white font-black text-sm shadow-md">
-                  AP
+                <div className="w-8 h-8 rounded-xl overflow-hidden shadow-md shadow-amber-500/20 border border-amber-500/30 flex items-center justify-center bg-slate-950">
+                  <AppIcon className="w-full h-full" />
                 </div>
                 <span className="font-extrabold text-base text-white tracking-tight">
                   Agri<span className="text-amber-500">Mach</span> Spares
@@ -133,10 +142,10 @@ const MainContent: React.FC = () => {
                 শোরুম এবং ক্যাটালগ
               </h5>
               <ul className="space-y-1.5 text-slate-400">
-                <li><button onClick={() => setIsGarageModalOpen(true)} className="hover:text-blue-400 transition">আমার গ্যারেজ সিলেক্টর</button></li>
-                <li><button onClick={() => setIsDiagnosticOpen(true)} className="hover:text-blue-400 transition">AI মেকানিক্যাল রোগ নির্ণয়</button></li>
-                <li><span className="text-slate-500">ব্রেকিং এবং চ্যাসিস</span></li>
-                <li><span className="text-slate-500">ইঞ্জিন এবং হাইড্রোলিক টিউন-আপ</span></li>
+                <li><button onClick={() => setIsGarageModalOpen(true)} className="hover:text-amber-400 transition">আমার গ্যারেজ সিলেক্টর</button></li>
+                <li><button onClick={() => setIsDiagnosticOpen(true)} className="hover:text-amber-400 transition">AI মেকানিক্যাল রোগ নির্ণয়</button></li>
+                <li><button onClick={() => setIsShareModalOpen(true)} className="hover:text-amber-400 transition flex items-center gap-1">📱 অ্যাপ শেয়ার ও QR কোড</button></li>
+                <li><span className="text-slate-500">ব্রেকিং এবং চ্যাসিস পার্টস</span></li>
               </ul>
             </div>
 
@@ -210,6 +219,7 @@ const MainContent: React.FC = () => {
       <UserOrdersModal />
       <SpecialRequestModal />
       <PartFormModal />
+      <ShareAppModal />
     </div>
   );
 };

@@ -106,6 +106,8 @@ interface ShopContextType {
   setEditingPart: (part: SparePart | null) => void;
   isSpecialRequestOpen: boolean;
   setIsSpecialRequestOpen: (open: boolean) => void;
+  isShareModalOpen: boolean;
+  setIsShareModalOpen: (open: boolean) => void;
 
   // Admin Tab
   adminTab: 'inventory' | 'orders' | 'ai-forecaster' | 'suppliers' | 'categories';
@@ -344,6 +346,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isPartFormOpen, setIsPartFormOpen] = useState(false);
   const [editingPart, setEditingPart] = useState<SparePart | null>(null);
   const [isSpecialRequestOpen, setIsSpecialRequestOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [adminTab, setAdminTab] = useState<'inventory' | 'orders' | 'ai-forecaster' | 'suppliers' | 'categories'>('inventory');
 
   // Toast
@@ -613,6 +616,8 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setEditingPart,
         isSpecialRequestOpen,
         setIsSpecialRequestOpen,
+        isShareModalOpen,
+        setIsShareModalOpen,
         adminTab,
         setAdminTab,
         toastMessage,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useShop } from '../context/ShopContext';
 import { 
   Wrench, 
@@ -9,8 +9,11 @@ import {
   Store, 
   PlusCircle,
   HelpCircle,
+  Share2,
+  Check,
 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { AppIcon } from './AppIcon';
 
 export const Navbar: React.FC = () => {
   const {
@@ -25,14 +28,19 @@ export const Navbar: React.FC = () => {
     setIsPartFormOpen,
     setEditingPart,
     setIsSpecialRequestOpen,
+    setIsShareModalOpen,
   } = useShop();
+
+  const handleOpenShare = () => {
+    setIsShareModalOpen(true);
+  };
 
   const activeOrdersCount = orders.filter(
     (o) => o.status === 'pending' || o.status === 'processing' || o.status === 'ready_for_pickup' || o.status === 'shipped'
   ).length;
 
   return (
-    <header className="sticky top-0 z-40 bg-slate-900 border-b border-slate-800 text-white shadow-lg">
+    <header className="sticky top-0 z-40 bg-slate-900 border-b border-slate-800 text-white shadow-lg relative">
       {/* Top Utility Bar */}
       <div className="hidden sm:flex bg-slate-950 px-4 py-1.5 text-xs text-slate-400 border-b border-slate-800/80 items-center justify-between gap-2">
         <div className="flex items-center gap-3">
@@ -47,6 +55,16 @@ export const Navbar: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-3">
+          <button 
+            id="top-share-app-btn"
+            onClick={handleOpenShare}
+            className="text-slate-300 hover:text-amber-300 transition flex items-center gap-1.5 text-xs group"
+            title="অ্যাপটি বন্ধুদের সাথে শেয়ার করুন"
+          >
+            <Share2 className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition" />
+            <span>অ্যাপ শেয়ার করুন</span>
+          </button>
+          <span className="text-slate-600">•</span>
           <button 
             onClick={() => setIsSpecialRequestOpen(true)}
             className="text-slate-300 hover:text-white transition flex items-center gap-1 text-xs"
@@ -63,8 +81,8 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
         {/* Left: Brand Logo */}
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-amber-600 via-orange-500 to-yellow-500 flex items-center justify-center shadow-md shadow-amber-500/20 text-white font-bold">
-            <Wrench className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-white" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-md shadow-amber-500/20 border border-amber-500/30 flex items-center justify-center bg-slate-950">
+            <AppIcon className="w-full h-full" />
           </div>
           <div>
             <div className="flex items-center gap-1">
@@ -101,8 +119,20 @@ export const Navbar: React.FC = () => {
           )}
         </div>
 
-        {/* Right Section: Mode Toggle + Cart / Orders + Mobile Drawer Trigger */}
-        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+        {/* Right Section: Share + Mode Toggle + Cart / Orders */}
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* Share Button on AppBar */}
+          <button
+            id="appbar-share-btn"
+            onClick={handleOpenShare}
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-750 hover:border-amber-500/40 bg-slate-800/90 hover:bg-slate-750 text-slate-200 hover:text-white text-xs font-semibold transition shadow-sm group"
+            title="অ্যাপটি বন্ধুদের সাথে শেয়ার করুন"
+            aria-label="Share App"
+          >
+            <Share2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 group-hover:scale-110 transition" />
+            <span className="hidden sm:inline text-[11px] sm:text-xs">শেয়ার করুন</span>
+          </button>
+
           {/* Mode Switcher Pill */}
           <div className="bg-slate-950 p-0.5 sm:p-1 rounded-xl border border-slate-800 flex items-center text-xs shrink-0">
             <button
