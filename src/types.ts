@@ -113,7 +113,7 @@ export interface AIDiagnosticResponse {
   explanation: string;
   recommendedPartCategories: string[];
   suggestedOEMNumbers: string[];
-  estimatedLaborDifficulty: 'DIY Easy (15-30m)' | 'Moderate DIY (1-2 hrs)' | 'Professional Recommended (2+ hrs)';
+  estimatedLaborDifficulty: string;
   safetyWarning?: string;
   stepByStepChecks: string[];
 }

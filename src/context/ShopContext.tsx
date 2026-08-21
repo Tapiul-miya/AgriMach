@@ -115,6 +115,7 @@ interface ShopContextType {
 
   // Notification Toast
   toastMessage: string | null;
+  setToastMessage: (msg: string | null) => void;
   showToast: (msg: string) => void;
 }
 
@@ -621,6 +622,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         adminTab,
         setAdminTab,
         toastMessage,
+        setToastMessage,
         showToast,
         categories,
         addCategory,

@@ -577,7 +577,7 @@ export const AdminDashboard: React.FC = () => {
                         ₹ {ord.total.toFixed(2)}
                       </div>
                       <div className="text-[10px] text-slate-400 uppercase">
-                        {ord.paymentMethod === 'cash' ? 'ক্যাশ অন ডেলিভারি' : ord.paymentMethod === 'upi' ? 'ইউপিআই (UPI)' : ord.paymentMethod === 'card' ? 'কার্ড পেমেন্ট' : 'পদ্ধতি: ' + ord.paymentMethod}
+                        {ord.paymentMethod === 'cash_on_delivery' ? 'ক্যাশ অন ডেলিভারি' : ord.paymentMethod === 'credit_card' ? 'কার্ড পেমেন্ট' : ord.paymentMethod === 'bank_transfer' ? 'ব্যাংক ট্রান্সফার' : 'পদ্ধতি: ' + ord.paymentMethod}
                       </div>
                     </div>
 
@@ -1076,7 +1076,7 @@ export const AdminDashboard: React.FC = () => {
                 <div className="p-4 bg-slate-950/60 rounded-xl border border-slate-800/80 text-xs space-y-1.5">
                   <div className="text-slate-400">আপনি কি নিশ্চিত যে এই স্পেয়ার পার্ট SKU-টি মুছে ফেলতে চান?</div>
                   <div className="font-black text-white text-sm mt-1">{partToDelete.name}</div>
-                  <div className="text-[10px] text-slate-500 font-mono">ID: {partToDelete.id} • SKU: {partToDelete.sku}</div>
+                  <div className="text-[10px] text-slate-500 font-mono">ID: {partToDelete.id} • OEM: {partToDelete.oemNumber}</div>
                 </div>
 
                 <div className="flex items-center gap-2.5 justify-end pt-2">
