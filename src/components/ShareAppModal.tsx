@@ -21,7 +21,7 @@ import { AppIcon } from './AppIcon';
 import { appIconMaster, appIconAlt } from '../assets/images';
 
 export const ShareAppModal: React.FC = () => {
-  const { isShareModalOpen, setIsShareModalOpen } = useShop();
+  const { isShareModalOpen, setIsShareModalOpen, installPWA, deferredPrompt, isPWAInstalled } = useShop();
   const [copied, setCopied] = useState(false);
   const [showQr, setShowQr] = useState(false);
   const [isZipping, setIsZipping] = useState(false);
@@ -216,6 +216,39 @@ export const ShareAppModal: React.FC = () => {
                     খুচরা যন্ত্রাংশ শপ
                   </p>
                 </div>
+              </div>
+            </div>
+
+            {/* PWA Install Button & Manual Guide */}
+            <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/40 space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-sm font-bold text-amber-300 flex items-center gap-1.5">
+                    <Smartphone className="w-4 h-4 text-amber-400" />
+                    <span>মোবাইল ও পিসিতে অ্যাপ ইনস্টল</span>
+                  </h4>
+                  <p className="text-[11px] text-slate-300 mt-0.5">
+                    কোনো প্লে-স্টোর ছাড়াই সরাসরি আপনার ফোনের হোমস্ক্রিনে অ্যাপ হিসেবে যুক্ত করুন
+                  </p>
+                </div>
+              </div>
+
+              <button
+                id="pwa-install-modal-action-btn"
+                onClick={installPWA}
+                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 active:scale-[0.99] transition cursor-pointer"
+              >
+                <Download className="w-4 h-4" />
+                <span>{isPWAInstalled ? 'অ্যাপটি ইতিমধ্যেই ইনস্টল করা আছে' : deferredPrompt ? 'অ্যাপ সরাসরি ইনস্টল করুন (Direct Install)' : 'ইনস্টল বাটন (Install Web App)'}</span>
+              </button>
+
+              {/* Manual Installation Guidelines if Browser Prompt Pending */}
+              <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-[11px] text-slate-300 space-y-1.5">
+                <div className="font-bold text-amber-400 text-xs">ম্যানুয়াল ইনস্টল নির্দেশিকা (যদি ইনস্টলে আটকে যায়):</div>
+                <ul className="space-y-1 list-disc list-inside text-slate-300">
+                  <li><strong className="text-white">অ্যান্ড্রয়েড ক্রোম (Chrome):</strong> ব্রাউজারের উপরে ডানের <strong>(⋮) তিন ডট মেনু</strong> ➔ <strong className="text-amber-300">'Add to Home screen'</strong> বা <strong className="text-amber-300">'Install app'</strong> অপশনে চাপ দিন।</li>
+                  <li><strong className="text-white">আইফোন (iPhone Safari):</strong> নিচে <strong>Share (↑)</strong> আইকন ➔ <strong className="text-amber-300">'Add to Home Screen'</strong> সিলেক্ট করুন।</li>
+                </ul>
               </div>
             </div>
 

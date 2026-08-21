@@ -117,6 +117,11 @@ interface ShopContextType {
   toastMessage: string | null;
   setToastMessage: (msg: string | null) => void;
   showToast: (msg: string) => void;
+
+  // PWA Install
+  deferredPrompt: any;
+  isPWAInstalled: boolean;
+  installPWA: () => Promise<void>;
 }
 
 const ShopContext = createContext<ShopContextType | undefined>(undefined);
@@ -358,6 +363,53 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setTimeout(() => {
       setToastMessage((current) => (current === msg ? null : current));
     }, 3500);
+  };
+
+  // PWA Install Prompt Logic
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isPWAInstalled, setIsPWAInstalled] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    const handleAppInstalled = () => {
+      setIsPWAInstalled(true);
+      setDeferredPrompt(null);
+      showToast('🎉 AgriMach ওয়েব অ্যাপ সফলভাবে ইনস্টল হয়েছে!');
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setIsPWAInstalled(true);
+    }
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
+  }, []);
+
+  const installPWA = async () => {
+    if (deferredPrompt) {
+      try {
+        deferredPrompt.prompt();
+        const choiceResult = await deferredPrompt.userChoice;
+        if (choiceResult.outcome === 'accepted') {
+          showToast('✓ অ্যাপ ইনস্টল শুরু হয়েছে...');
+          setIsPWAInstalled(true);
+        }
+        setDeferredPrompt(null);
+      } catch (err) {
+        console.error('PWA install error:', err);
+      }
+    } else {
+      setIsShareModalOpen(true);
+    }
   };
 
   // Sync state to local storage
@@ -628,6 +680,9 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         addCategory,
         updateCategory,
         deleteCategory,
+        deferredPrompt,
+        isPWAInstalled,
+        installPWA,
       }}
     >
       {children}

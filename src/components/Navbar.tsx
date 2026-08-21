@@ -56,13 +56,13 @@ export const Navbar: React.FC = () => {
 
         <div className="flex items-center gap-3">
           <button 
-            id="top-share-app-btn"
+            id="top-install-app-btn"
             onClick={handleOpenShare}
-            className="text-slate-300 hover:text-amber-300 transition flex items-center gap-1.5 text-xs group"
-            title="অ্যাপটি বন্ধুদের সাথে শেয়ার করুন"
+            className="text-amber-400 hover:text-amber-300 transition flex items-center gap-1.5 text-xs font-bold group"
+            title="ওয়েব অ্যাপ আপনার মোবাইলে বা পিসিতে ইনস্টল করুন"
           >
             <Share2 className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition" />
-            <span>অ্যাপ শেয়ার করুন</span>
+            <span>📱 অ্যাপ ইনস্টল করুন</span>
           </button>
           <span className="text-slate-600">•</span>
           <button 

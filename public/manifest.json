@@ -1,25 +1,32 @@
 {
+  "id": "/",
   "short_name": "AgriMach",
   "name": "AgriMach - ট্র্যাক্টর, জেসিবি ও হার্ভেস্টার",
-  "description": "খুচরা যন্ত্রাংশ শপ",
+  "description": "খুচরা যন্ত্রাংশ শপ - হেভি ট্র‍্যাক্টর, জেসিবি ও হার্ভেস্টার স্পেয়ার্স",
   "icons": [
     {
-      "src": "/app-icon.png",
+      "src": "/app-icon-192.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "192x192",
+      "purpose": "any"
     },
     {
       "src": "/app-icon-192.png",
       "type": "image/png",
       "sizes": "192x192",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     },
     {
       "src": "/app-icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/app-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
     },
     {
       "src": "/app-icon.svg",
@@ -29,8 +36,11 @@
     }
   ],
   "start_url": "/",
+  "scope": "/",
   "background_color": "#090d16",
   "theme_color": "#f59e0b",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "prefer_related_applications": false,
+  "categories": ["shopping", "business", "utilities"]
 }
